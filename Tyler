@@ -13,16 +13,27 @@
     <form>
         <label for="operandOne">x:</label>
         <input name="operandOne" id="operandOne" value="10">
+        
+        <button id="calculate" type="button">Calculate</button>
 
         <label for="total">Result:</label>
         <div name="total" id="total"></div>
     </form>
 
     <py-script>
-        input_box = Element("operandOne")
-        operandOne = float(input_box.value)
-        result = Element("total")
-        result.write("Hello! The input says: " + str(operandOne))
+        from js import document
+
+        def display_result(event):
+            input_box = Element("operandOne")
+            try:
+                operandOne = float(input_box.value)
+                result = Element("total")
+                result.element.innerHTML = "Hello! The input says: " + str(operandOne)
+            except ValueError:
+                result.element.innerHTML = "Please enter a valid number."
+
+        document.getElementById("calculate").addEventListener("click", display_result)
     </py-script>
 </body>
 </html>
+
